@@ -12,9 +12,10 @@ function setup() {
 
 function draw() {
   background(55, 100, 144)
-  particles.forEach((p) => {
+  particles.forEach((p, i) => {
     p.update()
     p.draw()
+    p.checkParticles(particles.slice(i))
   })
 }
 
@@ -49,5 +50,16 @@ class Particle {
     if (this.pos.y < 0 || this.pos.y > height) {
       this.vel.y *= -1
     }
+  }
+
+  checkParticles(particles) {
+    particles.forEach((p) => {
+      const d = dist(this.pos.x, this.pos.y, p.pos.x, p.pos.y)
+
+      if (d < 120) {
+        stroke('rgba(255,255,255,0.1)')
+        line(this.pos.x, this.pos.y, p.pos.x, p.pos.y)
+      }
+    })
   }
 }
