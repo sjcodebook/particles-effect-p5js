@@ -1,15 +1,21 @@
-let p
+const particles = []
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
 
-  p = new Particle()
+  const noOfParticles = Math.floor(window.innerWidth / 10)
+
+  for (let i = 0; i < noOfParticles; i++) {
+    particles.push(new Particle())
+  }
 }
 
 function draw() {
   background(55, 100, 144)
-  p.update()
-  p.draw()
+  particles.forEach((p) => {
+    p.update()
+    p.draw()
+  })
 }
 
 class Particle {
